@@ -1,3 +1,5 @@
+import exp from "constants";
+
 enum TaskStatus {
     PENDING = 'PENDING',
     IN_PROGRESS = 'IN_PROGRESS',
@@ -10,3 +12,5 @@ class Task {
   description: string;
   status: TaskStatus;
 }
+
+export { Task, TaskStatus };
