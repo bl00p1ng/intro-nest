@@ -1,4 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 
 @Controller('task')
-export class TaskController {}
+export class TaskController {
+    @Get()
+    helloWold(): string {
+        return 'Hello World';
+    }
+}
