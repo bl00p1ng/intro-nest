@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Task, TaskStatus } from './task.entity';
+import { log } from 'console';
 
 @Injectable()
 export class TaskService {
@@ -38,7 +39,7 @@ export class TaskService {
      * @param title Titulo de la tarea
      * @param description Descripcion de la tarea
      */
-    createTask(title: string, description: string) {
+    createTask(title: string, description: string): Task {
         // Definir una nueva tarea
         const task: Task = {
             id: this.tasks.length + 1,
@@ -55,5 +56,12 @@ export class TaskService {
 
     updateTask() {}
 
-    deleteTask() {}
+    /**
+     * Elimina una tarea por su id
+     * @param id Id de la tarea a eliminar
+     */
+    deleteTask(id: number) {
+        // Eliminar la tarea con el id especificado
+        this.tasks = this.tasks.filter(task => task.id !== id);
+    }
 }
