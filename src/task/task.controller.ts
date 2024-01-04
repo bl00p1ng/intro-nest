@@ -18,11 +18,11 @@ export class TaskController {
     }
 
     @Delete(':id')
-    deleteTask(@Param('id') id: number) {
+    deleteTask(@Param('id') id: string) {
         // Convertir el id a un numero
-        id = Number(id);
+        const idToDelete: number = Number(id);
 
         // Eliminar la tarea con el id especificado
-        return this.taskService.deleteTask(id);
+        return this.taskService.deleteTask(idToDelete);
     }
 }
