@@ -1,5 +1,5 @@
 import { TaskStatus } from "../task.entity";
-import { IsNotEmpty, IsString, MinLength } from "class-validator";
+import { IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
 
 class CreateTaskDTO {
     @IsString()
@@ -12,8 +12,17 @@ class CreateTaskDTO {
 }
 
 class UpdateTaskDTO {
+    @IsString()
+    @IsOptional()
     title?: string;
+
+    @IsString()
+    @IsOptional()
     description?: string;
+
+    @IsString()
+    @IsEnum(TaskStatus)
+    @IsOptional()
     status?: TaskStatus;
 }
 
