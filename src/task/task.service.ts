@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Task, TaskStatus } from './task.entity';
 import { log } from 'console';
+import { UpdateTaskDTO } from './dto/task.dto';
 
 @Injectable()
 export class TaskService {
@@ -35,6 +36,14 @@ export class TaskService {
     }
 
     /**
+     * Obtener una tarea por su id
+     * @param id Id de la tarea a buscar
+     */
+    getTaskById(id: number): Task {
+        return this.tasks.find(task => task.id === id);
+    }
+
+    /**
      * Crear una nueva tarea
      * @param title Titulo de la tarea
      * @param description Descripcion de la tarea
@@ -54,7 +63,18 @@ export class TaskService {
         return task;
     }
 
-    updateTask() {}
+    updateTask(id: number, updatedFields: UpdateTaskDTO) {
+        // Bucar la tarea a actualizar
+        const task = this.getTaskById(id);
+
+        // Actualizar la tarea
+        const newTask = Object.assign(task, updatedFields);
+
+        // Actualizar el arreglo de tareas
+        this.tasks = this.tasks.map(task => task.id === id ? newTask : task);
+
+        return newTask;
+    }
 
     /**
      * Elimina una tarea por su id

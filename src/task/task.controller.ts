@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { TaskService } from "./task.service";
-import { CreateTaskDTO } from "./dto/task.dto";
+import { Task } from "./task.entity";
+import { CreateTaskDTO, UpdateTaskDTO } from "./dto/task.dto";
 
 @Controller('task')
 export class TaskController {
@@ -15,6 +16,11 @@ export class TaskController {
     createTask(@Body() newTask: CreateTaskDTO) {
         // Crear una nueva tarea
         return this.taskService.createTask(newTask.title, newTask.description)
+    }
+
+    @Patch(':id')
+    updateTask(@Param('id') id: string, @Body() updatedFields: UpdateTaskDTO): Task {
+        return this.taskService.updateTask(Number(id), updatedFields);
     }
 
     @Delete(':id')
