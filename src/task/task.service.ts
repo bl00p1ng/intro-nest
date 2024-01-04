@@ -3,6 +3,7 @@ import { Task, TaskStatus } from './task.entity';
 
 @Injectable()
 export class TaskService {
+    // Arreglo que simula las tareas existentes en la base de datos
     private tasks: Task[] = [
         {
             id: 1,
@@ -24,11 +25,33 @@ export class TaskService {
         }
     ];
 
-    getAllTasks()  {
+    /**
+     * Obtiene todas las tareas existentes en la base de datos
+     * @returns {Task[]} Retorna todas las tareas existentes en la base de datos
+     */
+    getAllTasks(): Task[]  {
         return this.tasks;
     }
 
-    createTask() {}
+    /**
+     * Crear una nueva tarea
+     * @param title Titulo de la tarea
+     * @param description Descripcion de la tarea
+     */
+    createTask(title: string, description: string) {
+        // Definir una nueva tarea
+        const task: Task = {
+            id: this.tasks.length + 1,
+            title,
+            description,
+            status: TaskStatus.PENDING
+        };
+
+        // Agregar la tarea al arreglo de tareas
+        this.tasks.push(task);
+
+        return task;
+    }
 
     updateTask() {}
 
