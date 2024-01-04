@@ -63,6 +63,11 @@ export class TaskService {
         return task;
     }
 
+    /**
+     * Actualiza una tarea por su id
+     * @param id Id de la tarea a actualizar
+     * @param updatedFields Campos a actualizar
+     */
     updateTask(id: number, updatedFields: UpdateTaskDTO) {
         // Bucar la tarea a actualizar
         const task = this.getTaskById(id);
